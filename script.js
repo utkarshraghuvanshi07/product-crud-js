@@ -6,7 +6,8 @@ const productDiv = document.querySelector(".products");
 
 const updatebtn = document.querySelector("#update");
 
-const productArr = [];
+const productArr = JSON.parse(localStorage.getItem("products")) || [ ] ;
+
 
 let updateIndex = null;
 
@@ -35,6 +36,7 @@ let ui = () =>{
         </div>`
     });
 }
+ui();
 
 createbtn.addEventListener("click", () => {
   formDiv.style.display = "flex";
@@ -73,14 +75,16 @@ form.addEventListener("submit", (event) => {
   if(updateIndex !== null){
      productArr[updateIndex] = obj;
      updateIndex = null;
+     localStorage.setItem('products',JSON.stringify(productArr));
   } else{
      productArr.push(obj);
+     localStorage.setItem('products', JSON.stringify(productArr));
   }
   
- 
 
   ui();
-
+  console.log(productArr);
+  
   form.reset();
   formDiv.style.display = "none";
 });
@@ -98,6 +102,49 @@ let update = (index) =>{
 //delete
 let deleteCard = (index)=>{
   productArr.splice(index,1);
+  localStorage.setItem('products', JSON.stringify(productArr));
   ui();
 
 }
+
+
+
+// let n ="aara h"
+// console.log(n);
+
+
+// localStorage.setItem('name','UTKARSH');
+
+// let lsd =localStorage.getItem("name");
+
+// console.log(lsd)
+
+// let data = [
+//   {
+//     name: 'piyush',
+//     age: 69,
+//     address: 'saket nager',
+//     pincode: 462022,
+//   },
+//   {
+//     name: 'Aryan kelvin',
+//     age: 69,
+//     address: 'saket nager',
+//     pincode: 462022,
+//   },
+//   {
+//     name: 'Bhuvan bam',
+//     age: 69,
+//     address: 'Mumbai',
+//     pincode: 462022,
+//   }
+// ]
+
+// localStorage.setItem("fam-people",JSON.stringify(data));
+
+// const lsd = localStorage.getItem("fam-people");
+
+// let value = JSON.parse(lsd);
+// console.log(value);
+
+// localStorage.removeItem('fam-people');
